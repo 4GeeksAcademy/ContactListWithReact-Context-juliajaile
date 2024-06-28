@@ -7,10 +7,10 @@ import "../../styles/demo.css";
 
 export const AddNewContact = () => {
 	const { store, actions } = useContext(Context);
-	const [name, setName] = useState("")
-	const [phone, setPhone] = useState("")
-	const [adress, setAdress] = useState("")
-	const [email, setEmail] = useState("") 
+	const [name, setName] = useState("");
+	const [phone, setPhone] = useState("");
+	const [adress, setAdress] = useState("");
+	const [email, setEmail] = useState("");
 
 	
 	return (

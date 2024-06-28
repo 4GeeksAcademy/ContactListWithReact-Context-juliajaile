@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { ContactList } from "./views/ContactList";
 import { AddNewContact } from "./views/AddNewContact";
-import { NewContactCreated, Single } from "./views/DeleteContactModal";
+import { DeleteContactModal } from "./views/DeleteContactModal";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
