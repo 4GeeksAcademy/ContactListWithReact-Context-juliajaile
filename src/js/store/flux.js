@@ -3,14 +3,15 @@
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
-			contacts: []
+			contacts: [],
+			editContact: false
 		},
 		actions: {
-			fetchPostAgenda: () => {
+			fetchPostAgenda: () => { //create agenda
 				fetch('https://playground.4geeks.com/contact/agendas/julia', {
 					method: "POST",
 					headers: {
-						"Content-type": "application/json"
+						"Content-Type": "application/json"
 					}
 				})
 					.then(response => response.json())
@@ -19,18 +20,18 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.catch(error => console.log(error))
 			},
-			fetchPostContact: (name, phone, email, adress) => {
+			fetchPostContact: (name, phone, email, address) => { //create agenda contact
 				const newContact = {
-					name: name,
-					phone: phone,
-					email: email,
-					adress: adress
+					name,
+					phone,
+					email,
+					address,
 				}
 				fetch('https://playground.4geeks.com/contact/agendas/julia/contacts', {
 					method: "POST",
 					body: JSON.stringify(newContact),
 					headers: {
-						"Content-type": "application/json"
+						"Content-Type": "application/json"
 					}
 				})
 					.then(response => response.json())
@@ -39,7 +40,7 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.catch(error => console.log(error))
 			},
-			fetchGetContact: () => {
+			fetchGetContact: () => {  //get agenda contacts
 				fetch('https://playground.4geeks.com/contact/agendas/julia/contacts', {
 					method: "GET",
 				})
@@ -47,11 +48,11 @@ const getState = ({ getStore, setStore }) => {
 					.then(data => {
 						console.log(data) // Esto imprimirá en la consola el objeto exacto recibido del servidor
 						const store = getStore(); //guardar algo en mi variable "contacts" del store,
-						setStore({ contacts: [...store.contacts, data] }); //para mantener actualizados los contactos y sumarle a la lista previa, un contacto nuevo
+						setStore({ contacts: data.contacts });
 					})
 					.catch(error => console.log(error))// Manejo de errores
 			},
-			fetchDeleteContact: (id) => {
+			fetchDeleteContact: (id) => { //delete agenda contact
 				const deleteContact = {
 					slug: "julia",
 					contact_id: id
@@ -60,7 +61,7 @@ const getState = ({ getStore, setStore }) => {
 					method: "DELETE",
 					body: JSON.stringify(deleteContact),
 					headers: {
-						"Content-type": "application/json"
+						"Content-Type": "application/json"
 					}
 				})
 					.then(response => response.json())
@@ -70,6 +71,30 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.catch(error => console.log(error))// Manejo de errores)
 			},
+			fetchUpdateContact: (name, phone, email, address) => { //update agenda contact
+				const updateContact = {
+					name,
+					phone,
+					email,
+					address,
+				}
+				fetch(`https://playground.4geeks.com/contact/agendas/julia/contacts/${getStore().contactId}`, {
+					method: "PUT",
+					body: JSON.stringify(updateContact),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+						getActions().fetchGetContact();
+					})
+					.catch(error => console.log(error))
+			},
+			handleEditContact: (value, id) => {
+				setStore({ editContact: value, contactId: id })
+			}
 
 		}
 

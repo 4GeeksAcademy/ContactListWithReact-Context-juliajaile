@@ -5,3 +5,25 @@
     height: auto;
     max-width: 100%;
 }
+
+.contactListName {
+    list-style: none;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+
+.contactList {
+    list-style: none;
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #6C757C;
+}
+
+.card-text {
+    margin-right: 15px;
+}
+
+.editPen, .deleteTrash {
+    float: right;
+}
