@@ -65,11 +65,8 @@ const getState = ({ getStore, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(response => response.json())
-					.then(data => {
-						console.log(data);
-						fetchGetContact();
-					})
+					.then(response => getActions().fetchGetContact())
+
 					.catch(error => console.log(error))// Manejo de errores)
 			},
 			fetchUpdateContact: (name, phone, email, address) => { //update agenda contact
@@ -101,7 +98,7 @@ const getState = ({ getStore, setStore }) => {
 					const response = await fetch("https://randomuser.me/api/?results=100");
 					const data = await response.json();
 					const userRandom = data.results;
-					setStore({pictureRandom: userRandom});
+					setStore({ pictureRandom: userRandom });
 
 
 				} catch (error) {
