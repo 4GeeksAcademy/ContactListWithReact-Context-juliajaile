@@ -22,11 +22,10 @@ export const AddNewContact = () => {
 		} else {
 			actions.fetchUpdateContact(name, phone, email, address);
 			actions.fetchGetContact();
-			navigate("/"); // sirve como link para usar dentro de funciones y que te lleve a la página que quieras una vez se le llama
+			navigate("/");
 		}
 
 	}
-
 
 
 

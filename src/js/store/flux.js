@@ -4,7 +4,8 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			contacts: [],
-			editContact: false
+			editContact: false,
+			pictureRandom: []
 		},
 		actions: {
 			fetchPostAgenda: () => { //create agenda
@@ -94,10 +95,22 @@ const getState = ({ getStore, setStore }) => {
 			},
 			handleEditContact: (value, id) => {
 				setStore({ editContact: value, contactId: id })
-			}
+			},
+			fetchGetPictureRandom: async () => {  //obtener imagen random cada vez que actualizo página
+				try {
+					const response = await fetch("https://randomuser.me/api/?results=100");
+					const data = await response.json();
+					const userRandom = data.results;
+					setStore({pictureRandom: userRandom});
 
+
+				} catch (error) {
+					console.error("Error fetching random picture:", error);
+
+				}
+
+			},
 		}
-
 	};
 }
 

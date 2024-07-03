@@ -29,7 +29,7 @@ export const ContactList = () => {
 					{store.contacts?.map((contact) => (
 						<div className="d-flex flex-row" key={contact.id}>
 							<div>
-								<img src="https://avatars.githubusercontent.com/u/73072636?v=4" className="card-img rounded-circle" alt="contact picture" />
+								<img src={store.pictureRandom[contact.id]?.picture.large} className="card-img rounded-circle" alt="random contact picture" />
 							</div>
 							<ul className="list-group">
 								<li className="contactListName">
@@ -63,7 +63,6 @@ export const ContactList = () => {
 											<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div className="modal-body">
-											<hr className="my-4" />
 											<p>If you delete this thing the entire world will go down!</p>
 										</div>
 										<div className="modal-footer">
