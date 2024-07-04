@@ -21,6 +21,10 @@ export const ContactList = () => {
 		navigate("/");
 
 	}
+	const handleEditContact = (name, phone, email, address, id) => {
+		actions.handleEditContact(true, id);
+		actions.selectedContact(name, phone, email, address);
+	}
 
 	return (
 		<div className="container">
@@ -47,7 +51,7 @@ export const ContactList = () => {
 							</ul>
 							<div className="float-right">
 								<Link to="/AddNewContact">
-									<button onClick={() => actions.handleEditContact(true, contact.id)} type="button" className="btn editPen">
+									<button onClick={() => handleEditContact(contact.name, contact.phone, contact.email, contact.address, contact.id)} type="button" className="btn editPen">
 										<FaPencil />
 									</button>
 								</Link>

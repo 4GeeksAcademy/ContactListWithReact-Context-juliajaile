@@ -1,11 +1,12 @@
 
 
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, setStore, getActions }) => {
 	return {
 		store: {
 			contacts: [],
 			editContact: false,
-			pictureRandom: []
+			pictureRandom: [],
+			selectedContact: {},
 		},
 		actions: {
 			fetchPostAgenda: () => { //create agenda
@@ -65,7 +66,12 @@ const getState = ({ getStore, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(response => getActions().fetchGetContact())
+					.then(response => {
+						console.log(response);
+						if (response.ok) {
+							getActions().fetchGetContact();
+						};
+					})
 
 					.catch(error => console.log(error))// Manejo de errores)
 			},
@@ -92,6 +98,10 @@ const getState = ({ getStore, setStore }) => {
 			},
 			handleEditContact: (value, id) => {
 				setStore({ editContact: value, contactId: id })
+			},
+			selectedContact: (name, phone, email, address) => {
+				setStore({ selectedContact: { name: name, phone: phone, email: email, address: address } })
+
 			},
 			fetchGetPictureRandom: async () => {  //obtener imagen random cada vez que actualizo página
 				try {

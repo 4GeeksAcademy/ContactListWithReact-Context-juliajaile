@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
@@ -27,7 +27,17 @@ export const AddNewContact = () => {
 
 	}
 
+	useEffect(() => {
+		if (store.selectedContact) {
+			setName(store.selectedContact.name || "")
+			setEmail(store.selectedContact.email || "")
+			setPhone(store.selectedContact.phone || "")
+			setAddress(store.selectedContact.address || "")
 
+		}
+		console.log(store.selectedContact)
+
+	}, [store.selectedContact]);
 
 	return (
 		<div className="container">
